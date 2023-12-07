@@ -1,0 +1,161 @@
+﻿@model RandevuAl
+@{
+    ViewData["Title"] = "RandevuAl";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    #mybox{
+        border:1px solid white;
+        background:white;
+        padding:10px;
+        border-radius:10px;
+        box-shadow:0 10px 10px 0 gray;
+    }
+</style>
+
+
+<div class="border border-light p-3 rounded mt-5" id="mybox" >
+    <h1>RandevuAl</h1> 
+<form class="row g-3" action="/Randevu/RandevuAl" method="post" id="myForm">
+        <div class="col-12">
+            @Html.LabelFor(m=>m.Sehir)
+            @Html.DropDownListFor(m=>m.Sehir, new List<SelectListItem>
+            {
+            new SelectListItem { Text = "Sakarya", Value = "1" }
+            }, "Şehir Seçiniz", new { @class = "form-control",id="sehir"})
+            @Html.ValidationMessageFor(m=>m.Sehir,"",new {@class="text-danger"})
+        </div>
+        <div class="col-12">
+            <label for="ilce" class="form-label">İlçe Seçiniz</label>
+            @Html.DropDownListFor(m=>m.Ilce, new List<SelectListItem>
+            {
+            new SelectListItem { Text = "Adapazarı", Value = "1" }
+            }, "İlçe Seçiniz", new { @class = "form-control",id="ilce" })
+            @Html.ValidationMessageFor(m=>m.Ilce,"",new {@class="text-danger"})
+        </div>
+        <div class="col-12">
+            <label for="hastane" class="form-label">Hastane Seçiniz</label>
+            @Html.DropDownListFor(m=>m.Hastane, new List<SelectListItem>
+            {
+            new SelectListItem { Text = "Sakarya Eğitim ve Araştırma Hastanesi", Value = "1" }
+            }, "Hastane Seçiniz", new { @class = "form-control" ,id="hastane"})
+            @Html.ValidationMessageFor(m=>m.Hastane,"",new {@class="text-danger"})
+        </div>
+        <div class="col-12">
+        <label for="dropdown" class="form-label">Bölüm Seçiniz</label>
+        @Html.DropDownListFor(m=>m.Bolum,ViewBag.Veriler as SelectList,"Lütfen Bir Bölüm Seçiniz!",new {@class="form-control",id="dropdown"})
+        @Html.ValidationMessageFor(m=>m.Bolum,"",new{@class="text-danger"})
+        </div>
+        <div class="col-12">
+            <label for="secondDrop" class="form-label">Doktor Seçiniz</label>
+            @Html.DropDownListFor( m=>m.Doktor,new List<SelectListItem>(),"Lütfen Doktor Seçiniz!",new {@class="form-control",id="secondDrop"})
+            @Html.ValidationMessageFor(m=>m.Doktor,"",new{@class="text-danger"})
+        </div>
+        <div class="col-12">
+            <label for="randevuSaat" class="form-label">Randevu Saati Seçiniz</label>
+            @Html.DropDownListFor(m=>m.Date,new List<SelectListItem>(),"Lütfen Saat Seçiniz!",new {@class="form-control",id="randevuSaat"})
+            @Html.ValidationMessageFor(m=>m.Date,"",new{@class="text-danger"})
+        </div>
+   
+ 
+  
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Randevu Al</button>
+    </div>
+  
+</form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    window.addEventListener("DOMContentLoaded", function (event) {
+        var elements = document.getElementsByTagName('select');
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].selectedIndex = 0;
+        }
+    });
+    
+    $('#ilce').prop("disabled", true);
+    $('#hastane').prop("disabled", true);
+    $('#dropdown').prop("disabled", true);
+    $('#secondDrop').prop("disabled", true);
+    $('#randevuSaat').prop("disabled",true);
+
+    $("#sehir").change(function () {
+        $('#ilce').prop("disabled", false);
+    });
+    $("#ilce").change(function () {
+        $('#hastane').prop("disabled", false);
+    });
+    $("#hastane").change(function () {
+        $('#dropdown').prop("disabled", false);
+    });
+    $("#dropdown").change(function () {
+        $('#secondDrop').prop("disabled", false);
+    });
+    $('#secondDrop').change(function () {
+        $('#randevuSaat').prop("disabled", false);
+    });
+
+
+    $(document).ready(function () {
+        
+
+
+        $("#dropdown").change(function () {
+            var selectedEntity = $(this).val();
+
+            $.ajax({
+                type: "GET",
+                url: "/api/ApiRandevu/DoktorGetir/"+selectedEntity, 
+                // data: { selectedEntity: selectedEntity },
+                success: function (data) {
+                    //$('#secondDrop').empty();
+                    for (var i = 0; i < data.length; i++) { 
+                        var option = new Option(data[i].isim+" "+data[i].soyisim,data[i].doktorId);
+                        $('#secondDrop').append(option);
+                    }
+                    console.log(data);
+                    console.log(data[0].isim);
+                },
+                error: function () {
+                    alert("Bir hata oluştu.");
+                }
+            });
+        });
+
+
+        $("#secondDrop").change(function () {
+            var selectedEntity = $("#secondDrop").val();
+            console.log(selectedEntity);
+            $.ajax({
+                type: "POST",
+                url: "/Randevu/RandevuGetir",
+                data: { selectedEntity: selectedEntity },
+                success: function (data) {
+                    console.log(data);
+                    //$('#randevuSaat').empty();
+                    for (var i = 0; i < data.length; i++) {
+                        
+                            var option = new Option(data[i].tarih, data[i].randevuid);
+                            $('#randevuSaat').append(option);
+                        
+                       
+                    }
+                    console.log(data);
+                    console.log(data[0].tarih);
+                    console.log(data[0].randevuid);
+                },
+                error: function () {
+                    alert("Bir hata oluştu.");
+                }
+            });
+        });
+
+
+
+
+    });
+
+    
+</script>
