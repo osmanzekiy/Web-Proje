@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using WebProje.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +7,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<HastaneContext>();
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => {
+    options.LoginPath = "/Login/GirisYap";
+    options.AccessDeniedPath = "/Login/Hata";
+    //options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+}
+);
 
 
 var app = builder.Build();
@@ -22,6 +30,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
