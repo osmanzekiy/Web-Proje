@@ -7,40 +7,84 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebProje.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+      #logout{
+          position:fixed;
+          bottom:0;
+          overflow:hidden;
+          width:230px;
+      }
+
+    </style>
 </head>
 <body>
+    <div class="sidebar">
+        <div class="title">
+            <div class="title-in">HRS</div>
+        </div>
+        <ul>
+            <li>
+                @{
+                if (User.IsInRole("Doktor"))
+                {
+                    <a asp-controller="Doktor" asp-action="Anasayfa"><i class="fa fa-home" aria-hidden="true"></i>Anasayfa</a>
+
+                }
+                else{
+                    <a asp-controller="Main" asp-action="Anasayfa"><i class="fa fa-home" aria-hidden="true"></i>Anasayfa</a>
+                }
+                
+                }
+            </li>
+            <li>
+                
+                <a asp-controller="Randevu" asp-action="RandevuAl"><i class="fa-solid fa-calendar-days"></i>Randevu Al</a>
+            </li>
+            <li><a asp-controller="Main" asp-action="Ayarlar"><i class="fa fa-cog"></i>Ayarlar</a></li>
+            @if (User.IsInRole("Admin"))
+            {
+                <li>
+                    <a asp-controller="Admin" asp-action="AdminSayfa"><i class="fa fa-wrench"></i>Admin Paneli</a>
+                </li>
+            }
+            <li id="logout">
+                <a asp-controller="Login" asp-action="CikisYap">Çıkış Yap</a>
+            </li>
+        
+        </ul>
+
+    </div>
+    <div class="content">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WebProje</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+        <nav class="navbar navbar-dark" style="background-color:#42505f">
+                <button id="btn1" style="margin-left:4px;" class="btn" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container ">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
+        
+    </div>
+    <div class="footer-ex">
+    <footer class="border-top footer text-muted" style="position:fixed;bottom:0;">
         <div class="container">
             &copy; 2023 - WebProje - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+    </div>
+ 
+    
+   
+        
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
