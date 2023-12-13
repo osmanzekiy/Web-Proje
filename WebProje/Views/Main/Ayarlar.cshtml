@@ -1,0 +1,53 @@
+﻿@model AyarlarViewModel
+@{
+    ViewData["Title"] = "Ayarlar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .uyari {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        border-radius: 10px;
+        padding: 10px;
+        margin-top: 20px;
+    }
+</style>
+
+<h1>Ayarlar</h1>
+
+@if (TempData["Ayarlar"] != null)
+{
+    <div class="row justify-content-center uyari">
+        <div class="col-md-6">
+            <div class="alert alert-success text-center">@TempData["Ayarlar"]</div>
+        </div>
+    </div>
+}
+
+<div class="row justify-content-center">
+<div class="col-6">
+    <form action="/Main/Ayarlar" method="post">
+        <div class="mb-2">
+        <label for="telefon">Telefon Numarası Değiştir</label>
+        <input type="text" asp-for="Telefon"class="form-control" />
+        <span asp-validation-for="Telefon"></span>
+        </div>
+        <div class="mb-2">
+            <label for="Password">Şifre</label>
+            <input type="text" asp-for="Password" class="form-control" />
+            <span asp-validation-for="Password"></span>
+        </div>
+        <div class="mb-2">
+            <button type="submit" class="btn btn-success">Kaydet</button>
+        </div>
+    </form>
+</div>
+</div>
+
+<script>
+    setTimeout(function () {
+        $(".alert").fadeOut();
+    }, 1500);
+</script>

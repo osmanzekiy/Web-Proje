@@ -1,0 +1,179 @@
+﻿@using System.Security.Claims;
+@model List<Randevu>
+@{
+    ViewData["Title"] = "Anasayfa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .uyari {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        border-radius: 10px;
+        padding: 10px;
+        margin-top: 20px;
+    }
+
+    .my-box {
+        background-color: aliceblue;
+        border-radius: 10px;
+        padding: 10px;
+        border: 2px solid aliceblue;
+        box-shadow: 0px 10px 20px 0px rgba(50, 50, 50, 0.52);
+        height: 100%;
+    }
+</style>
+
+
+@if (TempData["IslemBasarili"] != null)
+{
+    <div class="row justify-content-center uyari">
+        <div class="col-md-6">
+            <div class="alert alert-success text-center">@TempData["IslemBasarili"]</div>
+        </div>
+    </div>
+}
+
+
+<h1>Anasayfa</h1>
+
+<div class="text-center">
+    <h1 class="display-4">HRS'ye Hoşgeldiniz Sayın @User.FindFirst("Isim")?.Value @User.FindFirst("Soyisim")?.Value!!  </h1>
+
+
+</div>
+
+
+
+
+<div class="row text-center">
+    <div class="col-12 col-md-3 mt-3 ">
+        <div class="my-box">
+            <h2> Randevu </h2>
+            <span>@ViewBag.BuSeneAlınanRandevu</span>
+        </div>
+    </div>
+    <div class="col-12 col-md-6 mt-3 ">
+        <div class="my-box">
+            <h2>Bu Yıl En Çok Randevu Aldığınız Bölüm</h2>
+            <span>@ViewBag.EnCokBolum</span>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-3 mt-3 ">
+        <div class="my-box">
+            <h2>Tarih ve Saat</h2>
+            <span id="tarihSaat"></span>
+        </div>
+    </div>
+</div>
+
+<div class="row text-center mt-5">
+
+    <div class="col-12 col-md-6">
+        <div class="my-box">
+            <div class="row">
+
+                <div class="col-3">
+                    <img style="width:100%;" src="/icons8-user-96.png" />
+                </div>
+                <div class="col-3 text-start
+">
+                    <table class="table table-borderless">
+                        <tr>
+                            <td>T.C</td>
+                            <td>:</td>
+                            <td>@User.FindFirst(ClaimTypes.NameIdentifier)?.Value</td>
+                        </tr>
+                        <tr>
+                            <td>İsim</td>
+                            <td>:</td>
+                            <td>
+                                @User.FindFirst("Isim").Value
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Soyisim</td>
+                            <td>:</td>
+                            <td>@User.FindFirst("Soyisim").Value</td>
+                        </tr>
+                    </table>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="col-12 col-md-6">
+        <div class="my-box">
+            @if (Model.Count!=0)
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">İsim</th>
+                            <th scope="col">Soyisim</th>
+                            <th scope="col">Randevu Tarihi</th>
+                            <th scope="col">Doktor İsmi</th>
+                            <th scope="col">İptal Et</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int i = 1;
+                        }
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <th scope="row">@i</th>
+                                <td>@item.Hasta.Isim</td>
+                                <td>@item.Hasta.Soyisim</td>
+                                <td>@item.Tarih</td>
+                                <td>@item.Doktor.Isim @item.Doktor.Soyisim</td>
+                                <td><a asp-action="RandevuIptal" asp-controller="Randevu" asp-route-RandevuId="@item.RandevuId" class="btn btn-danger">İptal Et</a></td>
+                            </tr>
+                            i++;
+                        }
+
+                </tbody>
+            </table>
+            }
+            @if (Model.Count==0)
+            {
+                <div style="height:100%" class="justify-content-center align-content-center"><h2 class="text-danger">Aktif Randevunz Bulunmamaktadır!!!</h2></div>
+            }
+        </div>
+
+
+    </div>
+
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    // setTimeout(function () {
+    //     $(".alert").fadeOut();
+    //     $(".uyari").remove();
+    // }, 2000);
+
+    $(".alert").fadeOut(4000, function () {
+        $(".uyari").remove();
+    });
+
+    function tarihSaat() {
+        var content = document.getElementById("tarihSaat");
+        var day = new Date();
+        content.textContent = day.toLocaleString();
+    }
+
+    setInterval(tarihSaat, 1000);
+
+    tarihSaat();
+</script>
+
