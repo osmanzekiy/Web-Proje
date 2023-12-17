@@ -1,0 +1,107 @@
+﻿@model RandevuEkleViewModel
+@{
+    ViewData["Title"] = "AdminSayfa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+ #mybox{
+        border:1px solid white;
+        background:white;
+        padding:10px;
+        border-radius:10px;
+        box-shadow:0 10px 10px 0 gray;
+    }
+
+    .uyari {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        border-radius: 10px;
+        padding: 10px;
+        margin-top: 20px;
+    }
+</style>
+
+@if (TempData["mesaj"] != null)
+{
+    <div class="row justify-content-center uyari">
+        <div class="col-md-6">
+            <div class="alert alert-success text-center">@TempData["mesaj"]</div>
+        </div>
+    </div>
+}
+@if (ViewBag.hata != null)
+{
+    <div class="row justify-content-center uyari">
+        <div class="col-md-6">
+            <div class="alert alert-danger text-center">@ViewBag.hata</div>
+        </div>
+    </div>
+}
+
+<h1>Admin Sayfa</h1>
+
+<div class="border border-light p-3 rounded mt-5" id="mybox" >
+    <h1>RandevuAl</h1> 
+<form class="row g-3" action="/Admin/RandevuEkle" method="post" id="myForm">
+        <div class="col-12">
+            <label for="dropdown" class="form-label">Bölüm Seçiniz</label>
+            @Html.DropDownListFor(m=>m.Bolum,ViewBag.Bölümler as SelectList,"Lütfen Bir Bölüm Seçiniz!",new {@class="form-control",id="dropdown"})
+            @Html.ValidationMessageFor(m=>m.Bolum,"",new{@class="text-danger"})
+        </div>
+        <div class="col-12">
+            <label for="secondDrop" class="form-label">Doktor Seçiniz</label>
+            @Html.DropDownListFor( m=>m.Doktor,new List<SelectListItem>(),"Lütfen Doktor Seçiniz!",new {@class="form-control",id="secondDrop"})
+            @Html.ValidationMessageFor(m=>m.Doktor,"",new{@class="text-danger"})
+        </div>
+        <div class="col-12">
+            <label for="randevuSaat" class="form-label">Randevu Saati Seçiniz</label>
+            <input asp-for="Tarih" class="form-control" />
+            <span asp-validation-for="Tarih" class="text-danger"></span>
+            @* @Html.EditorFor(m=>m.Date,new { htmlAttributes = new {@class="form-control"}})
+            @Html.ValidationMessageFor(m=>m.Date,"",new{@class="text-danger"}) *@
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+        </div>
+    </form>
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+    window.addEventListener("DOMContentLoaded", function (event) {
+        var elements = document.getElementsByTagName('select');
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].selectedIndex = 0;
+        }
+    });
+
+    $("#dropdown").change(function () {
+        var selectedEntity = $(this).val();
+
+        $.ajax({
+            type: "GET",
+            url: "/api/ApiRandevu/DoktorGetir/" + selectedEntity,
+            // data: { selectedEntity: selectedEntity },
+            success: function (data) {
+                //$('#secondDrop').empty();
+                for (var i = 0; i < data.length; i++) {
+                    var option = new Option(data[i].isim + " " + data[i].soyisim, data[i].doktorId);
+                    $('#secondDrop').append(option);
+                }
+                console.log(data);
+                console.log(data[0].isim);
+            },
+            error: function () {
+                alert("Bir hata oluştu.");
+            }
+        });
+    });
+
+    $(".alert").fadeOut(4000, function () {
+        $(".uyari").remove();
+    });
+    </script>
+

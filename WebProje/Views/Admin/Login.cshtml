@@ -1,0 +1,67 @@
+﻿@model AdminLogin
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+
+    <style>
+        #centered {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 60px 55px 33px;
+            box-shadow: 0px 10px 20px 0px rgba(50, 50, 50, 0.52);
+        }
+
+        body {
+            background-color: #f2f2f2;
+        }
+    </style>
+
+
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WebProje.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center align-content-center">
+            <div id="centered" class="col-10 col-md-6 col-xl-4">
+                <h4 class="text-center mb-3">HASTANE RANDEVU SİSTEMİ ADMİN GİRİŞİ</h4>
+                <form action="/Admin/Login" method="post">
+                    <div class="form-group">
+                        <label for="Email" class="form-label">Admin E-Posta</label>
+                        <input type="text"  class="form-control mb-3" id="Email" asp-for="Email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="Password" class="form-label">Admin Şifre</label>
+                        <input type="password"  class="form-control mb-3" id="Sifre" asp-for="Password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Giriş Yap</button>
+                    <div><a class="btn btn-primary mt-1" asp-action="KayitOl" asp-controller="Login">Kayıt Ol</a></div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>
