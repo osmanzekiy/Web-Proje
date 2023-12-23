@@ -104,5 +104,36 @@ namespace WebProje.Controllers
                 }), "Value", "Text");
                 return View("AdminSayfa", model); 
         }
+        public IActionResult DoktorDuzen()
+        {
+            var data = _context.Doktorlar.Include(r=>r.Bolum).ToList();
+            return View(data);
+        }
+
+        public IActionResult Delete(int id)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                string apiUrl = $"https://localhost:7268/api/ApiRandevu/DoktorSil/{id}";
+                HttpResponseMessage response = client.DeleteAsync(apiUrl).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    string apiResponse = response.Content.ReadAsStringAsync().Result;
+                    TempData["mesaj"]= apiResponse;
+                }
+                else
+                {
+                    TempData["mesaj"] = "İşlem Gerçekleştirilemedi!";
+                }
+            }
+
+
+
+
+            //    var doktor = _context.Doktorlar.Find(id);
+            //_context.Doktorlar.Remove(doktor);
+            //_context.SaveChanges();
+            return RedirectToAction("DoktorDuzen");
+        }
     }
 }

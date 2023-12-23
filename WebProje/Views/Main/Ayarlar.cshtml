@@ -29,11 +29,14 @@
 <div class="row justify-content-center">
 <div class="col-6">
     <form action="/Main/Ayarlar" method="post">
-        <div class="mb-2">
-        <label for="telefon">Telefon Numarası Değiştir</label>
+            @if (!User.IsInRole("Admin"))
+            {
+                <div class="mb-2">
+                    <label for="telefon">Telefon Numarası Değiştir</label>
         <input type="text" asp-for="Telefon"class="form-control" />
         <span asp-validation-for="Telefon"></span>
         </div>
+        }
         <div class="mb-2">
             <label for="Password">Şifre</label>
             <input type="text" asp-for="Password" class="form-control" />

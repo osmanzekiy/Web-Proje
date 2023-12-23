@@ -16,6 +16,7 @@ namespace WebProje.Controllers
         {
             _context = context;
         }
+        [Authorize(Roles="Admin,Hasta")]
         public IActionResult Anasayfa()
         {
             string? id = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -29,6 +30,7 @@ namespace WebProje.Controllers
                 bolum = _context.Doktorlar.Where(r => r.DoktorId == encok.DoktorId).Select(r => r.Bolum.BolumAdi).FirstOrDefault();
                 ViewBag.EnCokBolum = "En Çok " + bolum + " Bölümünden " + encok.RandevuSayisi + " Adet Randevu Aldınız!";
             }
+            else
             ViewBag.EnCokBolum = "Henüz Sistemde Kayıtlı Randevunuz Yok!";
 
             return View(randevular);
@@ -42,30 +44,87 @@ namespace WebProje.Controllers
         [HttpPost]
         public IActionResult Ayarlar(AyarlarViewModel model)
         {
-            string? id = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            if (model.Password != null || model.Telefon != null)
+            if (User.IsInRole("Hasta"))
             {
-                if (model.Password != null)
+                string? id = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                if (model.Password != null || model.Telefon != null)
                 {
-                    var hasta = _context.Hastalar.Where(p => p.TC == id).FirstOrDefault();
-                    hasta.Password = model.Password;
-                    _context.SaveChanges();
-                    TempData["Ayarlar"] = "Şifre Başarı İle Değiştirildi!";
-                }
-                if (model.Telefon != null)
-                {
-                    var hasta = _context.Hastalar.Where(p => p.TC == id).FirstOrDefault();
-                    hasta.Telefon = model.Telefon;
-                    _context.SaveChanges();
-                    if (TempData["Ayarlar"] != null)
+                    if (model.Password != null)
                     {
-                        TempData["Ayarlar"] = "Şifre ve Telefon Başarı İle Değiştirildi!";
+                        var hasta = _context.Hastalar.Where(p => p.TC == id).FirstOrDefault();
+                        hasta.Password = model.Password;
+                        _context.SaveChanges();
+                        TempData["Ayarlar"] = "Şifre Başarı İle Değiştirildi!";
                     }
-                    else
-                        TempData["Ayarlar"] = "Telefon Başarı İle Değiştirildi";
+                    if (model.Telefon != null)
+                    {
+                        var hasta = _context.Hastalar.Where(p => p.TC == id).FirstOrDefault();
+                        hasta.Telefon = model.Telefon;
+                        _context.SaveChanges();
+                        if (TempData["Ayarlar"] != null)
+                        {
+                            TempData["Ayarlar"] = "Şifre ve Telefon Başarı İle Değiştirildi!";
+                        }
+                        else
+                            TempData["Ayarlar"] = "Telefon Başarı İle Değiştirildi";
+                    }
                 }
+                else TempData["Ayarlar"] = "Hiçbir Değişiklik Yapılmadı!";
             }
-            else TempData["Ayarlar"] = "Hiçbir Değişiklik Yapılmadı!";
+            else if (User.IsInRole("Doktor"))
+            {
+                string? id = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                if (model.Password != null || model.Telefon != null)
+                {
+                    if (model.Password != null)
+                    {
+                        var hasta = _context.Doktorlar.Where(p => p.TC == id).FirstOrDefault();
+                        hasta.Password = model.Password;
+                        _context.SaveChanges();
+                        TempData["Ayarlar"] = "Şifre Başarı İle Değiştirildi!";
+                    }
+                    if (model.Telefon != null)
+                    {
+                        var hasta = _context.Doktorlar.Where(p => p.TC == id).FirstOrDefault();
+                        //hasta.Telefon = model.Telefon;
+                        //_context.SaveChanges();
+                        if (TempData["Ayarlar"] != null)
+                        {
+                            TempData["Ayarlar"] = "Şifre ve Telefon Başarı İle Değiştirildi!";
+                        }
+                        else
+                            TempData["Ayarlar"] = "Telefon Başarı İle Değiştirildi";
+                    }
+                }
+                else TempData["Ayarlar"] = "Hiçbir Değişiklik Yapılmadı!";
+            }
+            else if (User.IsInRole("Admin"))
+            {
+                string? id = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                if (model.Password != null || model.Telefon != null)
+                {
+                    if (model.Password != null)
+                    {
+                        var hasta = _context.Adminler.Where(p => p.AdminId == int.Parse(id)).FirstOrDefault();
+                        hasta.Password = model.Password;
+                        _context.SaveChanges();
+                        TempData["Ayarlar"] = "Şifre Başarı İle Değiştirildi!";
+                    }
+                    if (model.Telefon != null)
+                    {
+                        var hasta = _context.Adminler.Where(p => p.AdminId == int.Parse(id)).FirstOrDefault();
+                        //hasta.Telefon = model.Telefon;
+                        //_context.SaveChanges();
+                        if (TempData["Ayarlar"] != null)
+                        {
+                            TempData["Ayarlar"] = "Şifre ve Telefon Başarı İle Değiştirildi!";
+                        }
+                        else
+                            TempData["Ayarlar"] = "Telefon Başarı İle Değiştirildi";
+                    }
+                }
+                else TempData["Ayarlar"] = "Hiçbir Değişiklik Yapılmadı!";
+            }
 
 
             return RedirectToAction("Ayarlar");

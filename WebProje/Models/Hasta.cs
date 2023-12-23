@@ -10,7 +10,8 @@ namespace WebProje.Models
     {
         public int HastaId { get; set; }
         [Required(ErrorMessage ="Bu Alan Boş Olamaz!")]
-        [StringLength(11)]
+        [StringLength(11, MinimumLength = 11)]
+
         public string TC { get; set; }
         [Required(ErrorMessage = "Bu Alan Boş Olamaz!")]
         public string Password { get; set; }

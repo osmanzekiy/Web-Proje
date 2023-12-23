@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.Security.Claims;
 using System.Text;
@@ -20,7 +21,14 @@ namespace WebProje.Controllers
         public IActionResult RandevuAl()
         {
           
-          
+            var calismaSaatleri = _context.CalismaSaatleri.Include(r => r.Doktor).Select(g => new
+            {
+                DoktorAd=g.Doktor.Isim+" "+g.Doktor.Soyisim,
+                Gun=g.Gun,
+                SaatBas=g.Baslangic,
+                SaatBit=g.Bitis
+            }).ToList();
+            ViewBag.calismaSaat = calismaSaatleri;
             var datas=_context.Bolumler.ToList();
             ViewBag.Veriler = new SelectList(datas.Select(e => new SelectListItem
             {
@@ -36,36 +44,14 @@ namespace WebProje.Controllers
         {
             if (ModelState.IsValid)
             {
-                Randevu _randevu=new Randevu();
-                //_randevu=_context.Randevular.Where(r => r.RandevuId == int.Parse(randevu.Date)).FirstOrDefault();
-                //_randevu.IsOpen = false;
-                string apiUrl = "https://localhost:7268/api/ApiRandevu/RandevuKaydet";
-                var postData = randevu;
-
-                using (HttpClient client = new HttpClient())
-                {
-                    // JSON verilerini dönüştürme
-                    string jsonData =JsonConvert.SerializeObject(postData);
-
-                    // İstek başlıklarını ayarlama (eğer gerekiyorsa)
-                    // client.DefaultRequestHeaders.Add("Authorization", "Bearer your-access-token");
-
-                    // POST isteği gönderme
-                    HttpResponseMessage response = await client.PostAsync(apiUrl, new StringContent(jsonData, Encoding.UTF8, "application/json"));
-
-                    // İstek sonucunu işleme
-                    if (response.IsSuccessStatusCode)
-                    {
-                        // Başarılı işlemler burada yapılabilir
-                        string responseContent = await response.Content.ReadAsStringAsync();
-                        ViewBag.ResponseData = responseContent;
-                    }
-                    else
-                    {
-                        // Hata durumları burada işlenebilir
-                        ViewBag.ErrorMessage = "Web API isteği başarısız oldu. Durum kodu: " + response.StatusCode;
-                    }
-                }
+                int id;
+                string tcm = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                if(User.IsInRole("Hasta")) id=_context.Hastalar.Where(r=>r.TC==tcm).Select(r=>r.HastaId).FirstOrDefault();
+                else id = _context.Doktorlar.Where(r => r.TC == tcm).Select(r => r.DoktorId).FirstOrDefault();
+                var data = _context.Randevular.Find(int.Parse(randevu.Date));
+                data.HastaId = id;
+                data.IsOpen = false;
+                _context.SaveChanges();
                 TempData["IslemBasarili"]="Randevunuz Başarıyla Oluşturuldu!!!";
                 return RedirectToAction("Anasayfa","Main");
             }
@@ -82,12 +68,22 @@ namespace WebProje.Controllers
             }
         }
 
+        [Authorize(Roles="Doktor")]
+        public IActionResult DoktorRandevuIptal(int RandevuId)
+        {
+            //var data = _context.Randevular.Find(RandevuId);
+            //_context.Randevular.Remove(data);
+            //_context.SaveChanges();
+            return RedirectToAction("Anasayfa", "Doktor");
+        }
         public IActionResult RandevuIptal(int RandevuId)
         {
             //var data = _context.Randevular.Find(RandevuId);
             //_context.Randevular.Remove(data);
             //_context.SaveChanges();
-            return RedirectToAction("Anasayfa","Main");
+            if (!User.IsInRole("Doktor"))
+                return RedirectToAction("Anasayfa", "Main");
+            else return RedirectToAction("Anasayfa", "Doktor");
         }
 
 
@@ -107,14 +103,18 @@ namespace WebProje.Controllers
         }
         public JsonResult RandevuGetir(string selectedEntity)
         {
-            int doktorid=int.Parse(selectedEntity);
-            var datas = _context.Randevular.Where(e => e.DoktorId == doktorid && e.IsOpen==true).Select(d => new
+            if (selectedEntity != null)
             {
-                randevuid=d.RandevuId,
-                tarih=d.Tarih.ToString("dd.MM.yyyy HH:mm:ss"),
-                isOpen=d.IsOpen
-            }).ToList();
-            return Json(datas);
+                int doktorid = int.Parse(selectedEntity);
+                var datas = _context.Randevular.Where(e => e.DoktorId == doktorid && e.IsOpen == true  && e.Tarih>DateTime.Now).Select(d => new
+                {
+                    randevuid = d.RandevuId,
+                    tarih = d.Tarih.ToString("dd.MM.yyyy HH:mm:ss"),
+                    isOpen = d.IsOpen
+                }).ToList();
+                return Json(datas);
+            }
+            else return Json(null);
         }
     }
 }

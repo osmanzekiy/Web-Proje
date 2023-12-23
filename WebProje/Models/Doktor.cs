@@ -8,6 +8,7 @@ namespace WebProje.Models
         public int DoktorId { get; set; }
         public string Isim { get; set; }
         public string Soyisim { get; set; }
+        [StringLength(11,MinimumLength =11)]
         public string TC { get; set; }
         public string Password { get; set; }
 
@@ -16,5 +17,6 @@ namespace WebProje.Models
 
         public int RolId { get; set; }
         public Roles Rol { get; set; }
+
     }
 }

@@ -1,0 +1,87 @@
+﻿@model List<WebProje.Models.Doktor>
+
+@{
+    ViewData["Title"] = "DoktorDuzen";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .uyari {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        border-radius: 10px;
+        padding: 10px;
+        margin-top: 20px;
+    }
+</style>
+
+@if (TempData["mesaj"] != null)
+{
+    <div class="row justify-content-center uyari">
+        <div class="col-md-6">
+            <div class="alert alert-success text-center">@TempData["mesaj"]</div>
+        </div>
+    </div>
+}
+
+<h1>DoktorDuzen</h1>
+
+<p>
+    <a class="btn btn-success" asp-action="Create">Ekle</a>
+</p>
+<p class="text-danger">
+    Doktor Silme İşlemi Doktora Ait Randevuları da Sistemden Siler!
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                İsim
+            </th>
+            <th>
+                Soyisim
+            </th>
+            <th>
+                TC
+            </th>
+            <th>
+                Bölüm
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Isim)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Soyisim)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TC)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bolum.BolumAdi)
+            </td>
+            <td>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.DoktorId">Doktoru Sil</a> 
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+ 
+
+    $(".alert").fadeOut(4000, function () {
+        $(".uyari").remove();
+    });
+</script>

@@ -34,9 +34,23 @@ namespace WebProje.Controllers
             string tc = login.TC;
             string password = login.Sifre;
             List<Claim> claims;
-          
-            
-            if(_context.Doktorlar.Any(d=>d.TC==tc && d.Password==password))
+
+
+
+                 if (_context.Hastalar.Any(h => h.TC == tc && h.Password == password))
+                {
+                    var h = _context.Hastalar.Include(p => p.Rol).Where(h => h.TC == tc && h.Password == password).FirstOrDefault();
+                    claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.NameIdentifier, tc),
+                        new Claim(ClaimTypes.Role,h.Rol.RolAdi.ToString()),
+                        new Claim("Isim",h.Isim),
+                        new Claim("Soyisim",h.Soyisim)
+
+                    };
+                    isDoktor = false;
+                }
+                else if (_context.Doktorlar.Any(d=>d.TC==tc && d.Password==password))
             {
              var d=_context.Doktorlar.Include(p=>p.Rol).Where(d=>d.TC==tc && d.Password==password).FirstOrDefault();
                      claims = new List<Claim>
@@ -49,24 +63,8 @@ namespace WebProje.Controllers
                     };
                     isDoktor=true;
                 }
-            else if(_context.Hastalar.Any(h=>h.TC==tc && h.Password==password))
-            {
-              var h=_context.Hastalar.Include(p=>p.Rol).Where(h=>h.TC==tc && h.Password==password).FirstOrDefault();
-                     claims = new List<Claim>
-                    {
-                        new Claim(ClaimTypes.NameIdentifier, tc),
-                        new Claim(ClaimTypes.Role,h.Rol.RolAdi.ToString()),
-                        new Claim("Isim",h.Isim),
-                        new Claim("Soyisim",h.Soyisim)
-               
-                    };
-                    isDoktor = false;
-                }
-            else
             
-                
-                
-                {
+            else {
                     ModelState.AddModelError("Sifre", "Kullanıcı Adı veya Şifre Hatalı !");
                     return View();
             }

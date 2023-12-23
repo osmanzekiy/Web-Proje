@@ -19,6 +19,7 @@ namespace WebProje.Models
         public DbSet<Doktor> Doktorlar { get; set; }
         public DbSet<Randevu> Randevular { get; set; }
         public DbSet<Admin> Adminler { get; set; }
+        public DbSet<CalismaSaatleri> CalismaSaatleri { get; set; }
         
 
       
