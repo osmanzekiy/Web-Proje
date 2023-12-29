@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "gHIKDuhcJpGH/HqiiQwkjQK7wy86+Vh7IIcX/ppWIwjOZEFAgoIIY/kx27HrwH3D9V3BQlf/kZov0JEIf8Kabg==",
+  "dgSpecHash": "mFVhRrd2egRCUkVH7Toeu1Wf5lEk0/VV4U0xbV2ZYDpGWu8VzJYjJMQ9E71qmVHLIbDNBlUa7aP4S3l94XJtIQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Osman Zeki\\Desktop\\webprojerepo\\WebProje\\WebProje.csproj",
+  "projectFilePath": "C:\\Users\\Osman Zeki\\Desktop\\webprohmyrep\\WebProje\\WebProje.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Osman Zeki\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Osman Zeki\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",

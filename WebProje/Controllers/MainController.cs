@@ -16,7 +16,7 @@ namespace WebProje.Controllers
         {
             _context = context;
         }
-        [Authorize(Roles="Admin,Hasta")]
+        [Authorize(Roles="Hasta")]
         public IActionResult Anasayfa()
         {
             string? id = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;

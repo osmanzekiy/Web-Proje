@@ -68,39 +68,32 @@ namespace WebProje.Controllers
             }
         }
 
-        [Authorize(Roles="Doktor")]
-        public IActionResult DoktorRandevuIptal(int RandevuId)
-        {
-            //var data = _context.Randevular.Find(RandevuId);
-            //_context.Randevular.Remove(data);
-            //_context.SaveChanges();
-            return RedirectToAction("Anasayfa", "Doktor");
-        }
+     
         public IActionResult RandevuIptal(int RandevuId)
         {
-            //var data = _context.Randevular.Find(RandevuId);
-            //_context.Randevular.Remove(data);
-            //_context.SaveChanges();
+            var data = _context.Randevular.Find(RandevuId);
+            _context.Randevular.Remove(data);
+            _context.SaveChanges();
             if (!User.IsInRole("Doktor"))
                 return RedirectToAction("Anasayfa", "Main");
             else return RedirectToAction("Anasayfa", "Doktor");
         }
 
 
-        public JsonResult DoktorGetir(string selectedEntity)
-        {
-            if (selectedEntity != null)
-            {
-                int bolumId = int.Parse(selectedEntity);
-                var datas = _context.Doktorlar.Where(e => e.BolumId == bolumId).ToList();
-                string tcm = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                if (datas.Any(d => d.TC == User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                    datas.Remove(datas.Where(d => d.TC == User.FindFirst(ClaimTypes.NameIdentifier).Value).FirstOrDefault());
+        //public JsonResult DoktorGetir(string selectedEntity)
+        //{
+        //    if (selectedEntity != null)
+        //    {
+        //        int bolumId = int.Parse(selectedEntity);
+        //        var datas = _context.Doktorlar.Where(e => e.BolumId == bolumId).ToList();
+        //        string tcm = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        //        if (datas.Any(d => d.TC == User.FindFirst(ClaimTypes.NameIdentifier).Value))
+        //            datas.Remove(datas.Where(d => d.TC == User.FindFirst(ClaimTypes.NameIdentifier).Value).FirstOrDefault());
 
-                return Json(datas);
-            }
-            else return Json(null);
-        }
+        //        return Json(datas);
+        //    }
+        //    else return Json(null);
+        //}
         public JsonResult RandevuGetir(string selectedEntity)
         {
             if (selectedEntity != null)

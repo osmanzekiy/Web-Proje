@@ -49,7 +49,7 @@ namespace WebProje.Controllers
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                                                   new ClaimsPrincipal(claimsIdentity),
                                                   authProperties);
-                    return RedirectToAction("Anasayfa", "Main");
+                    return RedirectToAction("AdminAnasayfa", "Admin");
                 }
                 else
                 {
@@ -67,6 +67,15 @@ namespace WebProje.Controllers
                 Value = e.BolumId.ToString(),
                 Text = e.BolumAdi
             }), "Value", "Text");
+            return View();
+        }
+
+        [Authorize(Roles="Admin")]
+        public IActionResult AdminAnasayfa()
+        {
+            var hastasay = _context.Hastalar.Count();
+            var doktorsay = _context.Doktorlar.Count();
+            ViewBag.hastavedoktor = "Sistemde Kayıtlı " + hastasay + " Adet Hasta " + doktorsay + " Adet Doktor Mevcut!";
             return View();
         }
 
@@ -104,6 +113,7 @@ namespace WebProje.Controllers
                 }), "Value", "Text");
                 return View("AdminSayfa", model); 
         }
+        [Authorize(Roles="Admin")]
         public IActionResult DoktorDuzen()
         {
             var data = _context.Doktorlar.Include(r=>r.Bolum).ToList();
@@ -135,5 +145,52 @@ namespace WebProje.Controllers
             //_context.SaveChanges();
             return RedirectToAction("DoktorDuzen");
         }
+
+        public IActionResult DoktorEkle()
+        {
+            var datas = _context.Bolumler.ToList();
+            ViewBag.Bolumler = new SelectList(datas.Select(e => new SelectListItem
+            {
+                Value = e.BolumId.ToString(),
+                Text = e.BolumAdi
+            }), "Value", "Text");
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult DoktorEkle(DoktorEkleViewModel model)
+        {
+            if(_context.Doktorlar.Any(x => x.TC == model.TC))
+            {
+                TempData["mesaj"] = "Girdiğiniz bilgiler sistemde mevcuttur!";
+                return RedirectToAction("DoktorEkle");
+            } 
+            if (ModelState.IsValid)
+            {
+                Doktor d = new Doktor();
+                d.Isim = model.Isim;
+                d.Soyisim = model.Soyisim;
+                d.TC = model.TC;
+                d.Password = model.Password;
+                d.RolId = 2;
+                d.BolumId = model.BolumId;
+                _context.Doktorlar.Add(d);
+                _context.SaveChanges();
+                TempData["mesajj"] = "İşlem Başarılı!";
+                return RedirectToAction("DoktorEkle");
+            }
+            else
+            {
+                var datas = _context.Bolumler.ToList();
+                ViewBag.Bolumler = new SelectList(datas.Select(e => new SelectListItem
+                {
+                    Value = e.BolumId.ToString(),
+                    Text = e.BolumAdi
+                }), "Value", "Text");
+                return View();
+            }
+        }
+
     }
 }
