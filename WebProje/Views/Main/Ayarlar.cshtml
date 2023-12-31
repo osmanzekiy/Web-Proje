@@ -29,16 +29,16 @@
 <div class="row justify-content-center">
 <div class="col-6">
     <form action="/Main/Ayarlar" method="post">
-            @if (!User.IsInRole("Admin"))
+            @if (User.IsInRole("Hasta"))
             {
                 <div class="mb-2">
-                    <label for="telefon">Telefon Numarası Değiştir</label>
+                    <label for="telefon">Yeni Telefon Numarası </label>
         <input type="text" asp-for="Telefon"class="form-control" />
         <span asp-validation-for="Telefon"></span>
         </div>
         }
         <div class="mb-2">
-            <label for="Password">Şifre</label>
+            <label for="Password">Yeni Şifre</label>
             <input type="text" asp-for="Password" class="form-control" />
             <span asp-validation-for="Password"></span>
         </div>

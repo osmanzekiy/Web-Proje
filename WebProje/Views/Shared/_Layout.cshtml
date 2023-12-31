@@ -29,10 +29,14 @@
                 @{
                 if (User.IsInRole("Doktor"))
                 {
-                    <a asp-controller="Doktor" asp-action="Anasayfa"><i class="fa fa-home" aria-hidden="true"></i>Anasayfa</a>
+                        <a asp-controller="Doktor" asp-action="Anasayfa"><i class="fa fa-home" aria-hidden="true"></i>Anasayfa</a>
 
-                }
-                else{
+                    }
+                    else if (User.IsInRole("Admin"))
+                    {
+                        <a asp-controller="Admin" asp-action="AdminAnasayfa"><i class="fa fa-home" aria-hidden="true"></i>Anasayfa</a>
+                    }
+                    else{
                     <a asp-controller="Main" asp-action="Anasayfa"><i class="fa fa-home" aria-hidden="true"></i>Anasayfa</a>
                 }
                 
@@ -71,13 +75,7 @@
     </div>
         
     </div>
-    <div class="footer-ex">
-    <footer class="border-top footer text-muted" style="position:fixed;bottom:0;">
-        <div class="container">
-            &copy; 2023 - WebProje - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    </div>
+
  
     
    

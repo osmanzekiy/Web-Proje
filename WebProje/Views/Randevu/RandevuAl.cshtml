@@ -8,6 +8,7 @@
 @inject LocalizationService Localizer
 
 @{
+    int i = 1;
     ViewData["Title"] = "RandevuAl";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -18,11 +19,58 @@
         padding: 10px;
         border-radius: 10px;
         box-shadow: 0 10px 10px 0 gray;
+        .modal-backdrop
     }
+
 </style>
 <div class="mt-2">
     @await Html.PartialAsync("_SetLanguagePartial")
 </div>
+
+<button type="button" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    @Localizer.GetLocalizedHtmlString("doktorcalissaat")
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">DOKTOR ÇALIŞMA SAATLERİ</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Doktor</th>
+                            <th scope="col">Gün</th>
+                            <th scope="col">Saat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewBag.calismasaat)
+                        {
+                            <tr>
+                                <th scope="row">@i</th>
+                                <td>@item.DoktorAd</td>
+                                <td>@item.Gun</td>
+                                <td>@item.SaatBas - @item.SaatBit</td>
+                            </tr>
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 @* <ul>
     @foreach (var item in ViewBag.calismaSaat)
@@ -36,7 +84,7 @@
 
 
 <div class="border border-light p-3 rounded mt-5" id="mybox">
-    <h1>RandevuAl</h1>
+    <h1>@Localizer.GetLocalizedHtmlString("randevubuton")</h1>
     <form class="row g-3" action="/Randevu/RandevuAl" method="post" id="myForm">
         <div class="col-12">
             @Html.LabelFor(m=>m.Sehir)
@@ -88,6 +136,8 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+    $('#exampleModal').appendTo("body")
+
     window.addEventListener("DOMContentLoaded", function (event) {
         var elements = document.getElementsByTagName('select');
         for (var i = 0; i < elements.length; i++) {
