@@ -173,6 +173,9 @@
 
 
         $("#dropdown").change(function () {
+            $('#secondDrop').empty();
+            $('#secondDrop').append(new Option("Lütfen Seçim Yapınız!",null));
+
             var selectedEntity = $(this).val();
 
             $.ajax({
@@ -196,6 +199,9 @@
 
 
         $("#secondDrop").change(function () {
+            $('#randevuSaat').empty();
+            $('#randevuSaat').append(new Option("Lütfen Seçim Yapınız!",null));
+
             var selectedEntity = $("#secondDrop").val();
             console.log(selectedEntity);
             $.ajax({

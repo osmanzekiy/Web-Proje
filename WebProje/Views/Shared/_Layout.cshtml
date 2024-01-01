@@ -37,15 +37,18 @@
                         <a asp-controller="Admin" asp-action="AdminAnasayfa"><i class="fa fa-home" aria-hidden="true"></i>Anasayfa</a>
                     }
                     else{
-                    <a asp-controller="Main" asp-action="Anasayfa"><i class="fa fa-home" aria-hidden="true"></i>Anasayfa</a>
-                }
-                
+                        <a asp-controller="Main" asp-action="Anasayfa"><i class="fa fa-home" aria-hidden="true"></i>Anasayfa</a>
+                    }
+
                 }
             </li>
-            <li>
-                
+            @if (!(User.IsInRole("Admin")))
+            {
+                <li>
+
                 <a asp-controller="Randevu" asp-action="RandevuAl"><i class="fa-solid fa-calendar-days"></i>Randevu Al</a>
             </li>
+            }
             <li><a asp-controller="Main" asp-action="Ayarlar"><i class="fa fa-cog"></i>Ayarlar</a></li>
             @if (User.IsInRole("Admin"))
             {

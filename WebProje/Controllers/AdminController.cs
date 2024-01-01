@@ -33,7 +33,7 @@ namespace WebProje.Controllers
                     var _admin = _context.Adminler.Include(p=>p.Rol).Where(p => p.Mail == admin.Email && p.Password == admin.Password).FirstOrDefault();
                     List<Claim> claims = new List<Claim>
                     {
-                        new Claim(ClaimTypes.NameIdentifier, _admin.RolId.ToString()),
+                        new Claim(ClaimTypes.NameIdentifier, _admin.AdminId.ToString()),
                         new Claim(ClaimTypes.Role,_admin.Rol.RolAdi.ToString()),
                         new Claim("Isim",_admin.Isim),
                         new Claim("Soyisim",_admin.Soyisim)

@@ -43,7 +43,7 @@ namespace WebProje.Controllers
         public IActionResult DoktorSil(string? id)
         {
             HastaneContext _context = new HastaneContext();
-            var doktor = _context.Doktorlar.Find(id);
+            var doktor = _context.Doktorlar.Find(int.Parse(id));
             _context.Doktorlar.Remove(doktor);
             _context.SaveChanges();
 
