@@ -9,89 +9,89 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = WebProje
 build_property.RootNamespace = WebProje
-build_property.ProjectDir = C:\Users\Osman Zeki\Desktop\webprohmyrep\WebProje\
+build_property.ProjectDir = C:\Users\Osman Zeki\Desktop\webprogmyreponoewwww\WebProje\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Osman Zeki\Desktop\webprohmyrep\WebProje
+build_property.MSBuildProjectDirectory = C:\Users\Osman Zeki\Desktop\webprogmyreponoewwww\WebProje
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Osman Zeki/Desktop/webprohmyrep/WebProje/Views/Admin/AdminAnasayfa.cshtml]
+[C:/Users/Osman Zeki/Desktop/webprogmyreponoewwww/WebProje/Views/Admin/AdminAnasayfa.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRtaW5BbmFzYXlmYS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Osman Zeki/Desktop/webprohmyrep/WebProje/Views/Admin/AdminSayfa.cshtml]
+[C:/Users/Osman Zeki/Desktop/webprogmyreponoewwww/WebProje/Views/Admin/AdminSayfa.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRtaW5TYXlmYS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Osman Zeki/Desktop/webprohmyrep/WebProje/Views/Admin/DoktorDuzen.cshtml]
+[C:/Users/Osman Zeki/Desktop/webprogmyreponoewwww/WebProje/Views/Admin/DoktorDuzen.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRG9rdG9yRHV6ZW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Osman Zeki/Desktop/webprohmyrep/WebProje/Views/Admin/DoktorEkle.cshtml]
+[C:/Users/Osman Zeki/Desktop/webprogmyreponoewwww/WebProje/Views/Admin/DoktorEkle.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRG9rdG9yRWtsZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Osman Zeki/Desktop/webprohmyrep/WebProje/Views/Admin/Login.cshtml]
+[C:/Users/Osman Zeki/Desktop/webprogmyreponoewwww/WebProje/Views/Admin/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTG9naW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Osman Zeki/Desktop/webprohmyrep/WebProje/Views/Doktor/Anasayfa.cshtml]
+[C:/Users/Osman Zeki/Desktop/webprogmyreponoewwww/WebProje/Views/Doktor/Anasayfa.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9rdG9yXEFuYXNheWZhLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Osman Zeki/Desktop/webprohmyrep/WebProje/Views/Home/Index.cshtml]
+[C:/Users/Osman Zeki/Desktop/webprogmyreponoewwww/WebProje/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Osman Zeki/Desktop/webprohmyrep/WebProje/Views/Home/Privacy.cshtml]
+[C:/Users/Osman Zeki/Desktop/webprogmyreponoewwww/WebProje/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Osman Zeki/Desktop/webprohmyrep/WebProje/Views/Login/GirisYap.cshtml]
+[C:/Users/Osman Zeki/Desktop/webprogmyreponoewwww/WebProje/Views/Login/GirisYap.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cR2lyaXNZYXAuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Osman Zeki/Desktop/webprohmyrep/WebProje/Views/Login/Hata.cshtml]
+[C:/Users/Osman Zeki/Desktop/webprogmyreponoewwww/WebProje/Views/Login/Hata.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cSGF0YS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Osman Zeki/Desktop/webprohmyrep/WebProje/Views/Login/KayitOl.cshtml]
+[C:/Users/Osman Zeki/Desktop/webprogmyreponoewwww/WebProje/Views/Login/KayitOl.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cS2F5aXRPbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Osman Zeki/Desktop/webprohmyrep/WebProje/Views/Main/Anasayfa.cshtml]
+[C:/Users/Osman Zeki/Desktop/webprogmyreponoewwww/WebProje/Views/Main/Anasayfa.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFpblxBbmFzYXlmYS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Osman Zeki/Desktop/webprohmyrep/WebProje/Views/Main/Ayarlar.cshtml]
+[C:/Users/Osman Zeki/Desktop/webprogmyreponoewwww/WebProje/Views/Main/Ayarlar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFpblxBeWFybGFyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Osman Zeki/Desktop/webprohmyrep/WebProje/Views/Randevu/RandevuAl.cshtml]
+[C:/Users/Osman Zeki/Desktop/webprogmyreponoewwww/WebProje/Views/Randevu/RandevuAl.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFuZGV2dVxSYW5kZXZ1QWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Osman Zeki/Desktop/webprohmyrep/WebProje/Views/Shared/Error.cshtml]
+[C:/Users/Osman Zeki/Desktop/webprogmyreponoewwww/WebProje/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Osman Zeki/Desktop/webprohmyrep/WebProje/Views/Shared/_SetLanguagePartial.cshtml]
+[C:/Users/Osman Zeki/Desktop/webprogmyreponoewwww/WebProje/Views/Shared/_SetLanguagePartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9TZXRMYW5ndWFnZVBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Osman Zeki/Desktop/webprohmyrep/WebProje/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Osman Zeki/Desktop/webprogmyreponoewwww/WebProje/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Osman Zeki/Desktop/webprohmyrep/WebProje/Views/_ViewImports.cshtml]
+[C:/Users/Osman Zeki/Desktop/webprogmyreponoewwww/WebProje/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Osman Zeki/Desktop/webprohmyrep/WebProje/Views/_ViewStart.cshtml]
+[C:/Users/Osman Zeki/Desktop/webprogmyreponoewwww/WebProje/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Osman Zeki/Desktop/webprohmyrep/WebProje/Views/Shared/_Layout.cshtml]
+[C:/Users/Osman Zeki/Desktop/webprogmyreponoewwww/WebProje/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-wp3nozgae1
