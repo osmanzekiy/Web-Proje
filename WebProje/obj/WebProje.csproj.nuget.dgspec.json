@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Osman Zeki\\Desktop\\webprogmyreponoewwww\\WebProje\\WebProje.csproj": {}
+    "C:\\Users\\Osman Zeki\\Desktop\\WebProje\\WebProje\\WebProje.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Osman Zeki\\Desktop\\webprogmyreponoewwww\\WebProje\\WebProje.csproj": {
+    "C:\\Users\\Osman Zeki\\Desktop\\WebProje\\WebProje\\WebProje.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Osman Zeki\\Desktop\\webprogmyreponoewwww\\WebProje\\WebProje.csproj",
+        "projectUniqueName": "C:\\Users\\Osman Zeki\\Desktop\\WebProje\\WebProje\\WebProje.csproj",
         "projectName": "WebProje",
-        "projectPath": "C:\\Users\\Osman Zeki\\Desktop\\webprogmyreponoewwww\\WebProje\\WebProje.csproj",
+        "projectPath": "C:\\Users\\Osman Zeki\\Desktop\\WebProje\\WebProje\\WebProje.csproj",
         "packagesPath": "C:\\Users\\Osman Zeki\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Osman Zeki\\Desktop\\webprogmyreponoewwww\\WebProje\\obj\\",
+        "outputPath": "C:\\Users\\Osman Zeki\\Desktop\\WebProje\\WebProje\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Osman Zeki\\AppData\\Roaming\\NuGet\\NuGet.Config",
