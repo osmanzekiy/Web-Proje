@@ -21,9 +21,9 @@ namespace WebProje.Controllers
             string? id = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
             var myId =_context.Doktorlar.Where(t=>t.TC== User.FindFirst(ClaimTypes.NameIdentifier).Value).Select(a=>a.DoktorId).FirstOrDefault();
-            ViewBag.aktifrandevu = _context.Randevular.Include(r => r.Doktor).Include(r => r.Hasta).Where(m => m.Hasta.TC == User.FindFirst(ClaimTypes.NameIdentifier).Value && m.Tarih > DateTime.Now).ToList();
+            ViewBag.aktifrandevu = _context.Randevular.Include(r => r.Doktor).Include(r => r.Hasta).Include(r=>r.Doktor.Bolum).Where(m => m.Hasta.TC == User.FindFirst(ClaimTypes.NameIdentifier).Value && m.Tarih > DateTime.Now).ToList();
 
-            var randevular =_context.Randevular.Include(r=>r.Doktor).Include(r=>r.Hasta).Where(x=>x.DoktorId==myId && x.HastaId!=null && x.Tarih>DateTime.Now).ToList();
+            var randevular =_context.Randevular.Include(r=>r.Doktor).Include(r=>r.Hasta).Include(r=>r.Doktor.Bolum).Where(x=>x.DoktorId==myId && x.HastaId!=null && x.Tarih>DateTime.Now).ToList();
             ViewBag.BuSeneVerilenRandevu = _context.Randevular.Where(a => a.DoktorId == myId && a.IsOpen == false).Count();
 
             string bolum = "";

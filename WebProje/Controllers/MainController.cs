@@ -21,7 +21,7 @@ namespace WebProje.Controllers
         {
             string? id = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-            var randevular = _context.Randevular.Include(r => r.Doktor).Include(r => r.Hasta).Where(m => m.Hasta.TC == id && m.Tarih>DateTime.Now).ToList();
+            var randevular = _context.Randevular.Include(r => r.Doktor).Include(r => r.Hasta).Include(r=>r.Doktor.Bolum).Where(m => m.Hasta.TC == id && m.Tarih>DateTime.Now).ToList();
             ViewBag.BuSeneAlınanRandevu = _context.Randevular.Include(r => r.Hasta).Where(m => m.Hasta.TC == id && m.Tarih.Year==DateTime.Now.Year).Count();
             string bolum = "";
             var encok = _context.Randevular.Include(r => r.Doktor).Include(r => r.Hasta).Include(b => b.Doktor.Bolum).Where(m => m.Hasta.TC == id && m.Tarih.Year == DateTime.Now.Year).GroupBy(d => d.DoktorId).OrderByDescending(g => g.Count()).Select(g => new { DoktorId = g.Key, RandevuSayisi = g.Count() }).FirstOrDefault();

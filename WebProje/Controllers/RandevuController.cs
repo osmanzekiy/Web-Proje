@@ -18,6 +18,7 @@ namespace WebProje.Controllers
         {
             _context = context;
         }
+        [Authorize(Roles="Hasta,Doktor")]
         public IActionResult RandevuAl()
         {
           
@@ -40,20 +41,24 @@ namespace WebProje.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Hasta,Doktor")]
+
         public async Task<IActionResult> RandevuAl(RandevuAl randevu)
         {
-            if (ModelState.IsValid)
+             if (ModelState.IsValid)
             {
                 int id;
                 string tcm = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                if(User.IsInRole("Hasta")) id=_context.Hastalar.Where(r=>r.TC==tcm).Select(r=>r.HastaId).FirstOrDefault();
-                else id = _context.Doktorlar.Where(r => r.TC == tcm).Select(r => r.DoktorId).FirstOrDefault();
+                id=_context.Hastalar.Where(r=>r.TC==tcm).Select(r=>r.HastaId).FirstOrDefault();
                 var data = _context.Randevular.Find(int.Parse(randevu.Date));
                 data.HastaId = id;
                 data.IsOpen = false;
                 _context.SaveChanges();
                 TempData["IslemBasarili"]="Randevunuz Başarıyla Oluşturuldu!!!";
-                return RedirectToAction("Anasayfa","Main");
+
+                if (User.IsInRole("Hasta")) return RedirectToAction("Anasayfa", "Main");
+                else  return RedirectToAction("Anasayfa", "Doktor");
+               
             }
             else
             {

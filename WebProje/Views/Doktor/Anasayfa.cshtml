@@ -63,7 +63,7 @@
 
 <div class="row text-center mt-3">
 
-    <div class="col-12 col-md-6 mt-5">
+    <div class="col-12 col-md-4 mt-5">
         <div class="my-box">
             <div class="row">
 
@@ -98,7 +98,7 @@
     </div>
 
 
-    <div class="col-12 col-md-6 mt-5">
+    <div class="col-12 col-md-8 mt-5">
         <div class="my-box">
             @if (ViewBag.aktifrandevu.Count != 0)
             {
@@ -108,6 +108,7 @@
                             <th scope="col">#</th>
                             <th scope="col">İsim</th>
                             <th scope="col">Soyisim</th>
+                            <th scope="col">Bölüm Adı</th>
                             <th scope="col">Randevu Tarihi</th>
                             <th scope="col">Doktor İsmi</th>
                             <th scope="col">İptal Et</th>
@@ -123,6 +124,7 @@
                                 <th scope="row">@i</th>
                                 <td>@item.Hasta.Isim</td>
                                 <td>@item.Hasta.Soyisim</td>
+                                <td>@item.Doktor.Bolum.BolumAdi</td>
                                 <td>@item.Tarih</td>
                                 <td>@item.Doktor.Isim @item.Doktor.Soyisim</td>
                                 <td><a asp-action="RandevuIptal" asp-controller="Randevu" asp-route-RandevuId="@item.RandevuId" class="btn btn-danger">İptal Et</a></td>
@@ -152,6 +154,7 @@
                             <th scope="col">#</th>
                             <th scope="col">İsim</th>
                             <th scope="col">Soyisim</th>
+                            <th scope="col">Bölüm Adı</th>
                             <th scope="col">Randevu Tarihi</th>
                             <th scope="col">Doktor İsmi</th>
                             <th scope="col">İptal Et</th>
@@ -167,6 +170,7 @@
                                 <th scope="row">@i</th>
                                 <td>@item.Hasta.Isim</td>
                                 <td>@item.Hasta.Soyisim</td>
+                                <td>@item.Doktor.Bolum.BolumAdi</td>
                                 <td>@item.Tarih</td>
                                 <td>@item.Doktor.Isim @item.Doktor.Soyisim</td>
                                 <td><a asp-action="RandevuIptal" asp-controller="Randevu" asp-route-RandevuId="@item.RandevuId" class="btn btn-danger">İptal Et</a></td>

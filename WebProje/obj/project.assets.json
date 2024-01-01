@@ -11218,11 +11218,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Osman Zeki\\Desktop\\WebProje\\WebProje\\WebProje.csproj",
+      "projectUniqueName": "C:\\Users\\Osman Zeki\\Desktop\\webprogmyreponoewwww\\WebProje\\WebProje.csproj",
       "projectName": "WebProje",
-      "projectPath": "C:\\Users\\Osman Zeki\\Desktop\\WebProje\\WebProje\\WebProje.csproj",
+      "projectPath": "C:\\Users\\Osman Zeki\\Desktop\\webprogmyreponoewwww\\WebProje\\WebProje.csproj",
       "packagesPath": "C:\\Users\\Osman Zeki\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Osman Zeki\\Desktop\\WebProje\\WebProje\\obj\\",
+      "outputPath": "C:\\Users\\Osman Zeki\\Desktop\\webprogmyreponoewwww\\WebProje\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Osman Zeki\\AppData\\Roaming\\NuGet\\NuGet.Config",
